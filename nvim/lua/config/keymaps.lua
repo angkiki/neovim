@@ -30,6 +30,9 @@ vim.o.signcolumn = "yes"
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- insta quit nvim
+vim.api.nvim_set_keymap('n', '<leader>QQ', ':qa!<CR>', { noremap = true, silent = true })
+
 -- this remaps :Ex to <leader>pv
 -- which allows us to go back to file explorer
 -- by doing <leader>pv
