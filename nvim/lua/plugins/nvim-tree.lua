@@ -19,7 +19,10 @@ return {
             highlight NvimTreeNormalNC guibg=NONE ctermbg=NONE
         ]]
 
-        -- sets the keymap for triggering the nvim-tree
-        vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+        -- for oepning and closing the nvim tree
+        vim.keymap.set('n', '<leader>ee', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+        -- for moving the cursor in the tree to the current buffer
+        vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
     end
 }

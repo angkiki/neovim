@@ -17,5 +17,8 @@ return {
         vim.keymap.set("n", "<leader>bs", function() harpoon:list():select(2) end)
         vim.keymap.set("n", "<leader>bd", function() harpoon:list():select(3) end)
         vim.keymap.set("n", "<leader>bf", function() harpoon:list():select(4) end)
+
+        local harpoon_extensions = require("harpoon.extensions")
+        harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
     end
 }

@@ -31,7 +31,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- insta quit nvim
-vim.api.nvim_set_keymap('n', '<leader>QQ', ':qa!<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>QQ', ':qa!<CR>', { noremap = true, silent = true })
 
 -- this remaps :Ex to <leader>pv
 -- which allows us to go back to file explorer
@@ -51,18 +51,27 @@ vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Go to next
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 
 -- for window splitting & resizing
-vim.api.nvim_set_keymap('n', '<leader>ss', ':vsplit<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sv', ':split<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sq', ':q<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ss', ':vsplit<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>sv', ':split<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>sq', ':q<CR>', { noremap = true, silent = true })
 
 -- Resize splits using Ctrl + arrow keys
-vim.api.nvim_set_keymap('n', '<C-Up>', ':resize +3<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-Down>', ':resize -3<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-Up>', ':resize +3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-Down>', ':resize -3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true })
+-- Can uncomment and use the version below for MacOS
+-- because "Ctrl + Left/Right" moves between desktops
+-- vim.keymap.set('n', '<A-Up>', ':resize +3<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<A-Down>', ':resize -3<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<A-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<A-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true })
 
 -- Move between splits with <leader>h/j/k/l
-vim.api.nvim_set_keymap('n', '<leader>sh', '<C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sj', '<C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sk', '<C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sl', '<C-w>l', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>sh', '<C-w>h', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>sj', '<C-w>j', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>sk', '<C-w>k', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>sl', '<C-w>l', { noremap = true, silent = true })
+
+-- for clearing out search highlighting
+vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { noremap = true, silent = true })
