@@ -73,5 +73,13 @@ vim.keymap.set('n', '<leader>sj', '<C-w>j', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>sk', '<C-w>k', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>sl', '<C-w>l', { noremap = true, silent = true })
 
+-- Alternative Bindings for moving between tabs (easily with 1 hand)
+vim.keymap.set("n", "<leader>sa", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>sd", "<C-w>l", { noremap = true, silent = true })
+
+-- For navigating between Tabs
+vim.keymap.set("n", "<Tab>", "gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-Tab>", "gT", { noremap = true, silent = true })
+
 -- for clearing out search highlighting
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { noremap = true, silent = true })
