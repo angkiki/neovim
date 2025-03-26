@@ -3,7 +3,7 @@ return {
     config = function()
         require('nvim-tree').setup({
             view = {
-                width = 30, -- Width of the file explorer
+                width = 50, -- Width of the file explorer
             },
             git = {
                 enable = true, -- Show git status icons
