@@ -62,10 +62,10 @@ vim.keymap.set('n', '<C-Left>', ':vertical resize -3<CR>', { noremap = true, sil
 vim.keymap.set('n', '<C-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true })
 -- Can uncomment and use the version below for MacOS
 -- because "Ctrl + Left/Right" moves between desktops
--- vim.keymap.set('n', '<A-Up>', ':resize +3<CR>', { noremap = true, silent = true })
--- vim.keymap.set('n', '<A-Down>', ':resize -3<CR>', { noremap = true, silent = true })
--- vim.keymap.set('n', '<A-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
--- vim.keymap.set('n', '<A-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true })
+--[[ vim.keymap.set('n', '<A-Up>', ':resize +3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-Down>', ':resize -3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true }) ]]
 
 -- Move between splits with <leader>h/j/k/l
 vim.keymap.set('n', '<leader>sh', '<C-w>h', { noremap = true, silent = true })
@@ -80,6 +80,12 @@ vim.keymap.set("n", "<leader>sd", "<C-w>l", { noremap = true, silent = true })
 -- For navigating between Tabs
 vim.keymap.set("n", "<Tab>", "gt", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-Tab>", "gT", { noremap = true, silent = true })
+
+-- For moving the current file into a new Tab
+vim.keymap.set("n", "<leader>tn", ":tabedit %<CR>", { desc = "Move current file to new tab" })
+
+-- For closing the current tab
+vim.keymap.set("n", "<leader>tq", ":tabclose<CR>", { desc = "Close current tab" })
 
 -- for clearing out search highlighting
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { noremap = true, silent = true })
