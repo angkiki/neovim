@@ -12,6 +12,7 @@ return {
             },
             filters = {
                 dotfiles = false, -- Show dotfiles
+                git_ignored = false,
             },
         })
 
