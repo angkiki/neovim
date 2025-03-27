@@ -11,7 +11,7 @@ return {
                 enable = true, -- Show git status icons
             },
             filters = {
-                dotfiles = true, -- Show dotfiles
+                dotfiles = false, -- Show dotfiles
             },
         })
 

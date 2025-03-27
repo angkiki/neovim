@@ -50,12 +50,18 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = "Yank to system clipbo
 vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 
--- for window splitting & resizing
+-- #### Splits ####
+-- creating splits
 vim.keymap.set('n', '<leader>ss', ':vsplit<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>sv', ':split<CR>', { noremap = true, silent = true })
+
+-- closing splits
 vim.keymap.set('n', '<leader>sq', ':q<CR>', { noremap = true, silent = true })
 
--- Resize splits using Ctrl + arrow keys
+-- resize to equal splits
+vim.keymap.set('n', '<leader>s=', '<C-w>=', { noremap = true, silent = true })
+
+-- manual resizing
 vim.keymap.set('n', '<C-Up>', ':resize +3<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Down>', ':resize -3<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
@@ -76,16 +82,21 @@ vim.keymap.set('n', '<leader>sl', '<C-w>l', { noremap = true, silent = true })
 -- Alternative Bindings for moving between tabs (easily with 1 hand)
 vim.keymap.set("n", "<leader>sa", "<C-w>h", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>sd", "<C-w>l", { noremap = true, silent = true })
+-- ##############################
 
--- For navigating between Tabs
+-- #### Tabs ####
+-- navigation
 vim.keymap.set("n", "<Tab>", "gt", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-Tab>", "gT", { noremap = true, silent = true })
 
--- For moving the current file into a new Tab
+-- open in new tab
 vim.keymap.set("n", "<leader>tn", ":tabedit %<CR>", { desc = "Move current file to new tab" })
 
--- For closing the current tab
+-- closing
 vim.keymap.set("n", "<leader>tq", ":tabclose<CR>", { desc = "Close current tab" })
+-- ##############################
 
+
+-- #### Misc ####
 -- for clearing out search highlighting
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { noremap = true, silent = true })
