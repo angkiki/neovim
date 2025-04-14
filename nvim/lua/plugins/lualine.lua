@@ -6,6 +6,15 @@ return {
         ll.setup({
             options = {
                 theme = "ayu_dark"
+            },
+            sections = {
+                -- configure filename to show relative path
+                lualine_c = {
+                    {
+                        'filename',
+                        path = 1,
+                    }
+                }
             }
         })
     end
