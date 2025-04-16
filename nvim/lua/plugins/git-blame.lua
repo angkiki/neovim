@@ -14,4 +14,7 @@ return {
         date_format = "%d %B %Y", -- template for the date, check Date format section for more options
         virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
     },
+    keys = {
+        { "<leader>gcu", "<cmd>GitBlameCopyFileURL<CR>", desc = "Copy Git blame URL" }
+    }
 }
