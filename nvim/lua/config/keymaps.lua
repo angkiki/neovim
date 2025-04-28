@@ -51,6 +51,9 @@ vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Go to next
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 
 -- #### Splits ####
+-- default open splits to the right
+vim.o.splitright = true
+
 -- creating splits
 vim.keymap.set('n', '<leader>ss', ':vsplit<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>sv', ':split<CR>', { noremap = true, silent = true })
