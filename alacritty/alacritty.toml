@@ -1,0 +1,23 @@
+[font]
+
+normal.family = "Hack Nerd Font"
+normal.style = "Regular"
+
+bold.family = "Hack Nerd Font"
+bold.style = "Bold"
+
+italic.family = "Hack Nerd Font"
+italic.style = "Italic"
+
+bold_italic.family = "Hack Nerd Font"
+bold_italic.style = "Bold Italic"
+
+offset.y = 15
+size = 14.0
+
+# in MacOS - remaps Ctrl + / to send the correct command
+[[keyboard.bindings]]
+key = "Slash"
+mods = "Control"
+chars = "\u001f"
+
