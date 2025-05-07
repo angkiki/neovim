@@ -3,6 +3,7 @@ return {
     config = function()
         -- local cmp = require("cmp")
         local lspconfig = require("lspconfig")
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
         -- Example: Configure Lua language server
         lspconfig.lua_ls.setup({
@@ -11,11 +12,12 @@ return {
                     diagnostics = { globals = { "vim" } },
                 },
             },
-            capabilities = require("cmp_nvim_lsp").default_capabilities(),
+            capabilities = capabilities
         })
 
         -- Example: Configure TypeScript server
         lspconfig.ts_ls.setup({})
+        lspconfig.eslint.setup({ capabilities = capabilities })
 
         -- Add keybindings
         vim.keymap.set("n", "gd", function()
