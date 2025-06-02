@@ -129,5 +129,44 @@ then it will look something like this:
 7. [toggleterm](https://github.com/akinsho/toggleterm.nvim) - QoL plugin for accessing terminal within neovim
 8. [tokyonight](https://github.com/folke/tokyonight.nvim) - color scheme, for aesthetics
 
+# Installing Lazygit
 
+**On MacOS:**
+
+Using homebrew, `brew install lazygit`
+
+**On WSL:**
+
+TLDR: 
+
+```
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit -D -t /usr/local/bin/
+```
+
+Refer to [lazygit](https://github.com/jesseduffield/lazygit?tab=readme-ov-file#installation) for more info
+
+# Installing Ripgrep
+
+**On MacOS:**
+
+Using homebrew, `brew install ripgrep`
+
+**On WSL (Ubunutu):**
+
+`sudo apt install ripgrep -y`
+
+# Installing Nerd Font
+
+**On MacOS:**
+
+Using homebrew, `brew install --cask font-hack-nerd-font`. Update `alacritty.toml` to use fonts.
+
+**On WSL:**
+
+- download [hack nerd font](https://www.nerdfonts.com/font-downloads)
+- "install" it (double clicking the download files)
+- configure Ubuntu/WSL to use the font
 
