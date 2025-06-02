@@ -3,12 +3,16 @@
 ### On Windows (WSL):
 
 1. Download the Neovim Tarball from [Neovim Releases](https://github.com/neovim/neovim/releases)
-2. Move the Tarball into your WSL environment (i.e. mv ../../mnt/d/Mounted_Symlink_Folder/nvim-linux-x86_64.tar.gz ~/nvim-linux-x86_64.tar.gz
+2. Move the Tarball into your WSL environment 
+    a. (i.e. `mv ../../mnt/d/Mounted_Symlink_Folder/nvim-linux-x86_64.tar.gz ~/nvim-linux-x86_64.tar.gz`)
+
 3. Extract the Tarball `tar xzvf nvim-linux-x86_64.tar.gz`
 4. Move the relevant nvim files to their respective location
+
     a. `sudo mv nvim-linux64/bin/nvim /usr/local/bin/`
     b. `sudo mv nvim-linux64/share/nvim /usr/local/share/`
     c. `sudo mv nvim-linux64/lib/nvim /usr/local/lib/`
+
 5. Make sure `$PATH` is correctly exported `export PATH="$HOME/.local/bin:$PATH"`
 6. Run neovim `nvim .` like so
 
@@ -23,7 +27,7 @@
 
 After installation, you may run `:checkhealth lazy` to verify if things are working correctly
 
-### *Side Note*:
+*Side Note*:
 
 In the installation instructions, the `lazy.setup` is quite comprehensive, but it can be simplified to:
 
@@ -99,11 +103,15 @@ then it will look something like this:
 2. [mason](https://github.com/mason-org/mason.nvim) - for easily installing & managing LSPs, linters, formatters
 3. [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - QoL plugin for auto pairs
 4. [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - for handling auto completion
+
     a. [blink-cmp](https://github.com/Saghen/blink.cmp) - alternative consideration for auto completion
+
 5. [nvim-surround](https://github.com/kylechui/nvim-surround) - much needed "vim surround" behaviour
 6. [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua) - file explorer
 7. [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim) - Gaze deeply into unknown regions using the power of the moon
+
     a. (note: can be further enhanced with ripgrep - see below)
+
 8. [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - its just needed
 
 
@@ -113,7 +121,9 @@ then it will look something like this:
 2. [git-blame](https://github.com/f-person/git-blame.nvim) - to view git blame & easily copy git permalinks
 3. [git-signs](https://github.com/lewis6991/gitsigns.nvim) - signs to indicate changes (add/delete/modify) within a file
 4. [lazygit](https://github.com/kdheepak/lazygit.nvim) - QoL plugin for interacting with git 
+
     a. (note: requires separate lazygit installation -  see below)
+
 5. [nvim-lualine](https://github.com/nvim-lualine/lualine.nvim) - QoL plugin for making your neovim bar look pretty
 6. [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - not really optional given that it is so widely used, but purely for aesthetics
 7. [toggleterm](https://github.com/akinsho/toggleterm.nvim) - QoL plugin for accessing terminal within neovim
