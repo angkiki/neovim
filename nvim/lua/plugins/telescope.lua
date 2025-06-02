@@ -20,11 +20,16 @@ return {
         -- sudo apt install ripgrep -y
         -- to install in macOS
         -- brew install ripgrep
-        vim.keymap.set("n", "<leader>ps", function()
+        vim.keymap.set("n", "<leader>pss", function()
             local search = vim.fn.input("Grep > ")
             if search and search ~= "" then
-                builtin.grep_string({ search = search, cwd = vim.fn.getcwd() })
+                builtin.grep_string({ search = search, cwd = vim.fn.getcwd(), fixed_strings = true })
             end
+        end)
+
+        vim.keymap.set("n", "<leader>psl", function()
+            -- live search using ripgrep's regex engine
+            builtin.live_grep()
         end)
     end
 }

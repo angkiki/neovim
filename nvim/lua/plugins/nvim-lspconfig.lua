@@ -19,6 +19,19 @@ return {
         lspconfig.ts_ls.setup({})
         lspconfig.eslint.setup({ capabilities = capabilities })
 
+
+        -- Python
+        lspconfig.pyright.setup({
+            settings = {
+                python = {
+                    analysis = {
+                        extraPaths = { vim.fn.getcwd() }
+                    }
+                }
+            }
+        })
+        lspconfig.taplo.setup({})
+
         -- Add keybindings
         vim.keymap.set("n", "gd", function()
             vim.cmd("vsplit")
