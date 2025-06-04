@@ -101,17 +101,16 @@ then it will look something like this:
 
 1. [conform](https://github.com/stevearc/conform.nvim) - for handling auto formatting
 2. [mason](https://github.com/mason-org/mason.nvim) - for easily installing & managing LSPs, linters, formatters
-4. [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - for handling auto completion
+3. [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - for handling auto completion
 
     a. [blink-cmp](https://github.com/Saghen/blink.cmp) - alternative consideration for auto completion
 
-5. [nvim-surround](https://github.com/kylechui/nvim-surround) - much needed "vim surround" behaviour
-6. [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua) - file explorer
-7. [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim) - Gaze deeply into unknown regions using the power of the moon
+4. [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua) - file explorer
+5. [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim) - Gaze deeply into unknown regions using the power of the moon
 
     a. (note: can be further enhanced with ripgrep - see below)
 
-8. [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - its just needed
+6. [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - its just needed
 
 
 ### List of Optional Plugins:
@@ -124,10 +123,11 @@ then it will look something like this:
     a. (note: requires separate lazygit installation -  see below)
 
 5. [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - QoL plugin for auto pairs
-6. [nvim-lualine](https://github.com/nvim-lualine/lualine.nvim) - QoL plugin for making your neovim bar look pretty
-7. [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - not really optional given that it is so widely used, but purely for aesthetics
-8. [toggleterm](https://github.com/akinsho/toggleterm.nvim) - QoL plugin for accessing terminal within neovim
-9. [tokyonight](https://github.com/folke/tokyonight.nvim) - color scheme, for aesthetics
+6. [nvim-surround](https://github.com/kylechui/nvim-surround) - much needed "vim surround" behaviour
+7. [nvim-lualine](https://github.com/nvim-lualine/lualine.nvim) - QoL plugin for making your neovim bar look pretty
+8. [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - not really optional given that it is so widely used, but purely for aesthetics
+9. [toggleterm](https://github.com/akinsho/toggleterm.nvim) - QoL plugin for accessing terminal within neovim
+10. [tokyonight](https://github.com/folke/tokyonight.nvim) - color scheme, for aesthetics
 
 # Installing Lazygit
 
