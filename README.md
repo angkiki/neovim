@@ -122,9 +122,9 @@ then it will look something like this:
 
     a. (note: requires separate lazygit installation -  see below)
 
-5. [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - QoL plugin for auto pairs
-6. [nvim-surround](https://github.com/kylechui/nvim-surround) - much needed "vim surround" behaviour
-7. [nvim-lualine](https://github.com/nvim-lualine/lualine.nvim) - QoL plugin for making your neovim bar look pretty
+5. [lualine](https://github.com/nvim-lualine/lualine.nvim) - QoL plugin for making your neovim bar look pretty
+6. [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - QoL plugin for auto pairs
+7. [nvim-surround](https://github.com/kylechui/nvim-surround) - much needed "vim surround" behaviour
 8. [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - not really optional given that it is so widely used, but purely for aesthetics
 9. [toggleterm](https://github.com/akinsho/toggleterm.nvim) - QoL plugin for accessing terminal within neovim
 10. [tokyonight](https://github.com/folke/tokyonight.nvim) - color scheme, for aesthetics
