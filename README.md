@@ -101,7 +101,6 @@ then it will look something like this:
 
 1. [conform](https://github.com/stevearc/conform.nvim) - for handling auto formatting
 2. [mason](https://github.com/mason-org/mason.nvim) - for easily installing & managing LSPs, linters, formatters
-3. [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - QoL plugin for auto pairs
 4. [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - for handling auto completion
 
     a. [blink-cmp](https://github.com/Saghen/blink.cmp) - alternative consideration for auto completion
@@ -124,10 +123,11 @@ then it will look something like this:
 
     a. (note: requires separate lazygit installation -  see below)
 
-5. [nvim-lualine](https://github.com/nvim-lualine/lualine.nvim) - QoL plugin for making your neovim bar look pretty
-6. [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - not really optional given that it is so widely used, but purely for aesthetics
-7. [toggleterm](https://github.com/akinsho/toggleterm.nvim) - QoL plugin for accessing terminal within neovim
-8. [tokyonight](https://github.com/folke/tokyonight.nvim) - color scheme, for aesthetics
+5. [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - QoL plugin for auto pairs
+6. [nvim-lualine](https://github.com/nvim-lualine/lualine.nvim) - QoL plugin for making your neovim bar look pretty
+7. [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - not really optional given that it is so widely used, but purely for aesthetics
+8. [toggleterm](https://github.com/akinsho/toggleterm.nvim) - QoL plugin for accessing terminal within neovim
+9. [tokyonight](https://github.com/folke/tokyonight.nvim) - color scheme, for aesthetics
 
 # Installing Lazygit
 
