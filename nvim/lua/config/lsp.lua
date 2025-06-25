@@ -3,6 +3,13 @@ vim.lsp.enable({
 	"ts-ls",
 })
 
+vim.lsp.config("*", {
+	on_attach = function(client, bufnr)
+		local opts = { buffer = bufnr, noremap = true, silent = true }
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	end,
+})
+
 vim.diagnostic.config({
 	virtual_text = true,
 	underline = true,
