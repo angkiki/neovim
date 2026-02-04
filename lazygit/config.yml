@@ -1,4 +1,5 @@
-os:
-  editPreset: 'nvim-remote'
-  edit: 'nvim --server $NVIM --remote {{filename}}'
-  openDirInEditor: 'nvim --server $NVIM --remote {{dir}}'
+customCommands:
+  - key: 'O'
+    description: 'Open file in nvim buffer'
+    context: 'files'
+    command: 'nvim --server "$NVIM" --remote-expr "luaeval(\"lazygit_open_file(_A)\", \"{{.SelectedFile.Name}}\")"'

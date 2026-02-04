@@ -22,6 +22,32 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
     },
+    config = function()
+        -- on macOS, lazygit when installed via homebrew is installed in $HOME/Library/Application Support/
+        -- but the default behaviour of linux is to look for the config in ~/.config/lazygit/config.yml
+        -- to ensure that the config is easily clonable, we will make sure to specfiy where the config is
+        vim.g.lazygit_use_custom_config_file_path = 1
+        vim.g.lazygit_config_file_path = vim.fn.expand("~/.config/lazygit/config.yml")
+
+        -- Function to open a file from lazygit and close lazygit window
+        _G.lazygit_open_file = function(filepath)
+            vim.schedule(function()
+                -- Switch to the previous window (not the terminal)
+                vim.cmd('wincmd p')
+                -- Find and close all lazygit terminal buffers
+                for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+                    if vim.api.nvim_buf_is_valid(buf) then
+                        local bufname = vim.api.nvim_buf_get_name(buf)
+                        if bufname:match("lazygit") then
+                            vim.api.nvim_buf_delete(buf, { force = true })
+                        end
+                    end
+                end
+                -- Open the file as a buffer
+                vim.cmd('edit ' .. vim.fn.fnameescape(filepath))
+            end)
+        end
+    end,
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
