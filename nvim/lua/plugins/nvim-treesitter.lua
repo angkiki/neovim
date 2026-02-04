@@ -18,12 +18,16 @@ return {
             sync_install = false,
             auto_install = true,
             highlight = { enable = true },
+            indent = { enable = true },
         })
 
-        -- to handle folding
+        -- Modern treesitter-based folding
         vim.opt.foldmethod = "expr"
-        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-        vim.opt.foldenable = true
+        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.opt.foldcolumn = "0"
+        vim.opt.foldtext = ""
         vim.opt.foldlevel = 99
+        vim.opt.foldlevelstart = 99
+        vim.opt.foldenable = true
     end
 }

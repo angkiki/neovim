@@ -13,13 +13,26 @@ vim.lsp.config("*", {
 })
 
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = {
+        spacing = 4,
+        prefix = "●",
+        virt_text_pos = "eol",
+        format = function(diagnostic)
+            local max_width = 80
+            if #diagnostic.message > max_width then
+                return diagnostic.message:sub(1, max_width) .. "..."
+            end
+            return diagnostic.message
+        end,
+    },
     underline = true,
     update_in_insert = false,
     severity_sort = true,
     float = {
         border = "rounded",
         source = true,
+        wrap = true,
+        max_width = 80,
     },
     signs = {
         text = {
@@ -34,6 +47,17 @@ vim.diagnostic.config({
         },
     },
 })
+
+-- Use undercurl instead of underline for better Kitty rendering
+vim.cmd([[
+  highlight DiagnosticUnderlineError gui=undercurl guisp=Red
+  highlight DiagnosticUnderlineWarn gui=undercurl guisp=Yellow
+  highlight DiagnosticUnderlineInfo gui=undercurl guisp=Blue
+  highlight DiagnosticUnderlineHint gui=undercurl guisp=Cyan
+  highlight DiagnosticUnderlineOk gui=undercurl guisp=Green
+  highlight DiagnosticDeprecated gui=undercurl guisp=#d4a520 cterm=undercurl
+  highlight DiagnosticUnnecessary gui=undercurl guisp=Gray cterm=undercurl
+]])
 
 local function restart_lsp(bufnr)
     bufnr = bufnr or vim.api.nvim_get_current_buf()

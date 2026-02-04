@@ -33,5 +33,15 @@ return {
             -- live search using ripgrep's regex engine
             builtin.live_grep()
         end, { desc = "telescope: open live file search with fuzzy finder" })
+
+        vim.keymap.set("n", "<leader>psr", function()
+            local pattern = vim.fn.input("Live Grep (regex) > ")
+
+            if pattern and pattern ~= "" then
+                require("telescope.builtin").live_grep({
+                    default_text = pattern,
+                })
+            end
+        end, { desc = "telescope: live_grep regex search" })
     end
 }
