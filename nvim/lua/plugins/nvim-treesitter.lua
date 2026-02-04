@@ -14,11 +14,16 @@ return {
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
-            ensure_installed = { "lua", "vim", "vimdoc", "javascript", "typescript" },
+            ensure_installed = { "lua", "vim", "vimdoc", "javascript", "typescript", "tsx", "jsx" },
             sync_install = false,
             auto_install = true,
             highlight = { enable = true },
             indent = { enable = true },
+        })
+
+        -- Enable context-aware commenting for TSX/JSX
+        require('ts_context_commentstring').setup({
+            enable_autocmd = false,
         })
 
         -- Modern treesitter-based folding
