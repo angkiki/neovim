@@ -1,0 +1,4 @@
+os:
+  editPreset: 'nvim-remote'
+  edit: 'nvim --server $NVIM --remote {{filename}}'
+  openDirInEditor: 'nvim --server $NVIM --remote {{dir}}'
