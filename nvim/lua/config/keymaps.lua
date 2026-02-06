@@ -21,6 +21,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipbo
 -- when there's a linting hint/error etc.
 vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Show diagnostic in floating window" })
 
 -- creating splits
 vim.keymap.set("n", "<leader>ss", ":vsplit<CR>", { noremap = true, silent = true })
@@ -33,16 +34,11 @@ vim.keymap.set("n", "<leader>sq", ":q<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>s=", "<C-w>=", { noremap = true, silent = true })
 
 -- manual resizing
-vim.keymap.set("n", "<C-Up>", ":resize +3<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-Down>", ":resize -3<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-Left>", ":vertical resize -3<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-Right>", ":vertical resize +3<CR>", { noremap = true, silent = true })
--- Can uncomment and use the version below for MacOS
--- because "Ctrl + Left/Right" moves between desktops
---[[ vim.keymap.set('n', '<A-Up>', ':resize +3<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<A-Down>', ':resize -3<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<A-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<A-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true }) ]]
+vim.keymap.set("n", "<C-k>", ":resize +3<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", ":resize -3<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-h>", ":vertical resize -3<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", ":vertical resize +3<CR>", { noremap = true, silent = true })
+
 
 -- Move between splits with <leader>h/j/k/l
 vim.keymap.set("n", "<leader>sh", "<C-w>h", { noremap = true, silent = true })

@@ -14,16 +14,25 @@ return {
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
-            ensure_installed = { "lua", "vim", "vimdoc", "javascript", "typescript" },
+            ensure_installed = { "lua", "vim", "vimdoc", "javascript", "typescript", "tsx" },
             sync_install = false,
             auto_install = true,
             highlight = { enable = true },
+            indent = { enable = true },
         })
 
-        -- to handle folding
+        -- Enable context-aware commenting for TSX/JSX
+        require('ts_context_commentstring').setup({
+            enable_autocmd = false,
+        })
+
+        -- Modern treesitter-based folding
         vim.opt.foldmethod = "expr"
-        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-        vim.opt.foldenable = true
+        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.opt.foldcolumn = "0"
+        vim.opt.foldtext = ""
         vim.opt.foldlevel = 99
+        vim.opt.foldlevelstart = 99
+        vim.opt.foldenable = true
     end
 }
