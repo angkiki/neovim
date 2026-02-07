@@ -11,7 +11,11 @@ vim.lsp.config["lua_ls"] = {
 		"selene.yml",
 		".git",
 	},
-	diagnostics = {
-		globals = { "vim" },
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+		},
 	},
 }

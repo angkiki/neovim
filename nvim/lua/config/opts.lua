@@ -28,3 +28,6 @@ vim.o.signcolumn = "yes"
 
 -- default open splits to the right
 vim.o.splitright = true
+
+-- enable syntax (required for LSP hover highlighting)
+vim.cmd('syntax on')

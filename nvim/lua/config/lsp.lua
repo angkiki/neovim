@@ -1,15 +1,17 @@
+vim.lsp.config("*", {
+    capabilities = require("blink.cmp").get_lsp_capabilities(),
+    on_attach = function(client, bufnr)
+        local opts = { buffer = bufnr, noremap = true, silent = true }
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    end,
+})
+
 vim.lsp.enable({
     "lua_ls",
     "ts-ls",
     "pyright",
-    "eslint"
-})
-
-vim.lsp.config("*", {
-    on_attach = function(client, bufnr)
-        local opts = { buffer = bufnr, noremap = true, silent = true }
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    end,
+    "eslint",
 })
 
 vim.diagnostic.config({
