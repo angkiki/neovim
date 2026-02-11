@@ -35,6 +35,7 @@ vim.diagnostic.config({
         source = true,
         wrap = true,
         max_width = 80,
+        focusable = true,
     },
     signs = {
         text = {
