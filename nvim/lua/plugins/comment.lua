@@ -1,13 +1,11 @@
 return {
     'numToStr/Comment.nvim',
-    opts = {
-        -- add any options here
+    dependencies = {
+        'JoosepAlviste/nvim-ts-context-commentstring',
     },
-    config = function(_, opts)
-        require("Comment").setup(opts)
-
-        -- Keymaps for Ctrl+/
-        vim.keymap.set("n", "<C-_>", "gcc", { remap = true, desc = "Toggle comments (normal mode)" })
-        vim.keymap.set("x", "<C-_>", "gb", { remap = true, desc = "Toggle comments (visual mode)" })
-    end
+    config = function()
+        require('Comment').setup({
+            pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+        })
+    end,
 }

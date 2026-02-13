@@ -15,6 +15,6 @@ return {
         virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
     },
     keys = {
-        { "<leader>gcu", "<cmd>GitBlameCopyFileURL<CR>", desc = "Copy Git blame URL" }
-    }
+        { "<leader>gcu", "<cmd>GitBlameCopyFileURL<CR>", desc = "git-blame: Copy Git blame URL" },
+    },
 }

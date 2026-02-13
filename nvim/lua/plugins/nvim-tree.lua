@@ -1,5 +1,5 @@
 return {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     config = function()
         local nt = require("nvim-tree")
         -- local api = require("nvim-tree.api")
@@ -24,9 +24,11 @@ return {
         ]]
 
         -- for opening and closing the nvim tree
-        vim.keymap.set('n', '<leader>ee', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>ee', ':NvimTreeToggle<CR>',
+            { noremap = true, silent = true, desc = "nvim-tree: toggles opening of nvim-tree" })
 
         -- for moving the cursor in the tree to the current buffer
-        vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>",
+            { noremap = true, silent = true, desc = "nvim-tree: opens the current file in nvim-tree" })
     end
 }
