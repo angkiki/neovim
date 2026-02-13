@@ -21,7 +21,9 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipbo
 -- when there's a linting hint/error etc.
 vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Show diagnostic in floating window" })
+vim.keymap.set("n", "<leader>dd", function()
+  vim.diagnostic.open_float({ focus = true })
+end, { desc = "Show diagnostic in floating window" })
 
 -- creating splits
 vim.keymap.set("n", "<leader>ss", ":vsplit<CR>", { noremap = true, silent = true })
