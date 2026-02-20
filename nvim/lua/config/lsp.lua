@@ -3,7 +3,9 @@ vim.lsp.config("*", {
     on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, noremap = true, silent = true }
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "K", function ()
+            vim.lsp.buf.hover({ border = "rounded" })
+        end, opts)
     end,
 })
 
