@@ -14,8 +14,8 @@ A personal Neovim config (and friends). This repo manages configs for:
 Clone the repo and run the setup script:
 
 ```bash
-git clone https://github.com/gabriel-tcs/angkiki_neovim.git ~/angkiki_neovim
-cd ~/angkiki_neovim
+git clone git@github.com:angkiki/neovim.git ~/neovim
+cd ~/neovim
 chmod +x setup.sh && ./setup.sh
 ```
 
