@@ -123,8 +123,10 @@ apt_install() {
     local cmd="${2:-$1}"  # command to check (defaults to package name)
     if command -v "$cmd" &>/dev/null; then
         success "$cmd already installed"
+    elif sudo apt-get install -y "$pkg"; then
+        success "$pkg installed"
     else
-        sudo apt-get install -y "$pkg"
+        warn "$pkg install failed — skipping (you may need to install it manually)"
     fi
 }
 
@@ -151,7 +153,7 @@ install_deps() {
             success "All dependencies installed"
             ;;
         wsl|linux-apt)
-            sudo apt-get update -qq
+            sudo apt-get update -qq || warn "apt update failed — package lists may be stale, continuing anyway"
             apt_install ripgrep
             apt_install fd-find fdfind
             apt_install unzip
