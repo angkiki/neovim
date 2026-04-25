@@ -12,6 +12,9 @@ for arg in "$@"; do
     esac
 done
 
+# ── Version Requirements ───────────────────────────────────────────────────────
+MIN_NVIM_VERSION="0.11.6"
+
 # ── Colours ────────────────────────────────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
 info()    { echo -e "${BLUE}[info]${NC}  $*"; }
@@ -42,6 +45,13 @@ detect_os() {
 OS=$(detect_os)
 info "Detected OS: $OS"
 
+# ── Version Checks ─────────────────────────────────────────────────────────────
+nvim_version_ok() {
+    command -v nvim &>/dev/null || return 1
+    local ver; ver=$(nvim --version | head -1 | sed 's/NVIM v//')
+    printf '%s\n%s\n' "$MIN_NVIM_VERSION" "$ver" | sort -V -C
+}
+
 # ── Helpers ────────────────────────────────────────────────────────────────────
 ensure_brew() {
     if ! command -v brew &>/dev/null; then
@@ -55,16 +65,18 @@ ensure_brew() {
 }
 
 install_neovim_linux() {
-    if command -v nvim &>/dev/null; then
+    if nvim_version_ok; then
         success "nvim already installed ($(nvim --version | head -1))"
         return
+    elif command -v nvim &>/dev/null; then
+        warn "nvim $(nvim --version | head -1) below minimum $MIN_NVIM_VERSION — upgrading..."
     fi
-    info "Installing Neovim from GitHub releases..."
+    info "Installing Neovim v${MIN_NVIM_VERSION}..."
     local tmp; tmp=$(mktemp -d)
     local arch; arch=$(uname -m)
     local tarball="nvim-linux-${arch}.tar.gz"
     curl -Lo "$tmp/$tarball" \
-        "https://github.com/neovim/neovim/releases/latest/download/$tarball"
+        "https://github.com/neovim/neovim/releases/download/v${MIN_NVIM_VERSION}/$tarball"
     tar -C "$tmp" -xzf "$tmp/$tarball"
     local extracted; extracted=$(find "$tmp" -maxdepth 1 -type d -name 'nvim-*' | head -1)
     sudo cp -r "$extracted/bin/nvim" /usr/local/bin/nvim
@@ -234,6 +246,11 @@ echo "  ─────────────────────"
 echo ""
 
 install_deps
+
+if ! nvim_version_ok; then
+    error "nvim >= $MIN_NVIM_VERSION required — got: $(nvim --version 2>/dev/null | head -1 || echo 'not found')"
+fi
+
 link_configs
 
 echo ""
