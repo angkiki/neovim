@@ -12,7 +12,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- no line wrapping
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- incremental searching highlighting
 vim.opt.incsearch = true
