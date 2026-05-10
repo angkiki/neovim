@@ -64,28 +64,6 @@ ensure_brew() {
     fi
 }
 
-install_neovim_linux() {
-    if nvim_version_ok; then
-        success "nvim already installed ($(nvim --version | head -1))"
-        return
-    elif command -v nvim &>/dev/null; then
-        warn "nvim $(nvim --version | head -1) below minimum $MIN_NVIM_VERSION — upgrading..."
-    fi
-    info "Installing Neovim v${MIN_NVIM_VERSION}..."
-    local tmp; tmp=$(mktemp -d)
-    local arch; arch=$(uname -m)
-    local tarball="nvim-linux-${arch}.tar.gz"
-    curl -Lo "$tmp/$tarball" \
-        "https://github.com/neovim/neovim/releases/download/v${MIN_NVIM_VERSION}/$tarball"
-    tar -C "$tmp" -xzf "$tmp/$tarball"
-    local extracted; extracted=$(find "$tmp" -maxdepth 1 -type d -name 'nvim-*' | head -1)
-    sudo cp -r "$extracted/bin/nvim" /usr/local/bin/nvim
-    sudo cp -r "$extracted/share/nvim" /usr/local/share/nvim 2>/dev/null || true
-    sudo cp -r "$extracted/lib/nvim"   /usr/local/lib/nvim   2>/dev/null || true
-    rm -rf "$tmp"
-    success "nvim installed"
-}
-
 install_lazygit_linux() {
     if command -v lazygit &>/dev/null; then
         success "lazygit already installed"
@@ -157,7 +135,6 @@ install_deps() {
     case "$OS" in
         macos)
             ensure_brew
-            brew_install neovim
             brew_install lazygit
             brew_install ripgrep
             brew_install fd
@@ -171,13 +148,11 @@ install_deps() {
             apt_install unzip
             apt_install curl
             apt_install git
-            install_neovim_linux
             install_lazygit_linux
             install_nerd_font_linux
             success "All dependencies installed"
             ;;
         linux-arch)
-            pacman_install neovim
             pacman_install lazygit
             pacman_install ripgrep
             pacman_install fd
@@ -188,55 +163,51 @@ install_deps() {
             success "All dependencies installed"
             ;;
         *)
-            warn "Unknown OS — skipping dependency installation. Install manually: neovim, lazygit, ripgrep, fd, a Nerd Font"
+            warn "Unknown OS — skipping dependency installation. Install manually: lazygit, ripgrep, fd, a Nerd Font"
             ;;
     esac
 }
 
 # ── Symlinks ───────────────────────────────────────────────────────────────────
-# Maps: <repo subdir> → <target path>
-declare -A SYMLINKS=(
-    ["nvim"]="$HOME/.config/nvim"
-    ["kitty"]="$HOME/.config/kitty"
-    ["lazygit"]="$HOME/.config/lazygit"
-)
-if [[ "$USE_ALACRITTY" == true ]]; then
-    SYMLINKS["alacritty"]="$HOME/.config/alacritty"
-fi
+_link_one() {
+    local src_name="$1"
+    local dest="$2"
+    local src="$REPO_DIR/$src_name"
+
+    if [[ ! -d "$src" ]]; then
+        warn "Repo dir '$src_name/' not found — skipping"
+        return
+    fi
+
+    if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
+        success "$dest already linked"
+        return
+    fi
+
+    if [[ -e "$dest" && ! -L "$dest" ]]; then
+        local backup="${dest}.bak.$(date +%Y%m%d%H%M%S)"
+        warn "Backing up existing $dest → $backup"
+        mv "$dest" "$backup"
+    elif [[ -L "$dest" ]]; then
+        warn "Removing stale symlink at $dest"
+        rm "$dest"
+    fi
+
+    ln -s "$src" "$dest"
+    success "Linked $dest → $src"
+}
 
 link_configs() {
     info "Setting up config symlinks..."
     mkdir -p "$HOME/.config"
 
-    for src_name in "${!SYMLINKS[@]}"; do
-        local src="$REPO_DIR/$src_name"
-        local dest="${SYMLINKS[$src_name]}"
+    _link_one "nvim"    "$HOME/.config/nvim"
+    _link_one "kitty"   "$HOME/.config/kitty"
+    _link_one "lazygit" "$HOME/.config/lazygit"
 
-        # Skip if the source doesn't exist in the repo
-        if [[ ! -d "$src" ]]; then
-            warn "Repo dir '$src_name/' not found — skipping"
-            continue
-        fi
-
-        # Already a symlink pointing to the right place
-        if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
-            success "$dest already linked"
-            continue
-        fi
-
-        # Backup any existing real directory
-        if [[ -e "$dest" && ! -L "$dest" ]]; then
-            local backup="${dest}.bak.$(date +%Y%m%d%H%M%S)"
-            warn "Backing up existing $dest → $backup"
-            mv "$dest" "$backup"
-        elif [[ -L "$dest" ]]; then
-            warn "Removing stale symlink at $dest"
-            rm "$dest"
-        fi
-
-        ln -s "$src" "$dest"
-        success "Linked $dest → $src"
-    done
+    if [[ "$USE_ALACRITTY" == true ]]; then
+        _link_one "alacritty" "$HOME/.config/alacritty"
+    fi
 }
 
 # ── Main ───────────────────────────────────────────────────────────────────────
@@ -248,7 +219,15 @@ echo ""
 install_deps
 
 if ! nvim_version_ok; then
-    error "nvim >= $MIN_NVIM_VERSION required — got: $(nvim --version 2>/dev/null | head -1 || echo 'not found')"
+    current=$(nvim --version 2>/dev/null | head -1 || echo 'not found')
+    echo ""
+    echo -e "${RED}[error]${NC} nvim >= $MIN_NVIM_VERSION required — got: $current" >&2
+    case "$OS" in
+        macos)   echo "  Install: brew install neovim  (or download from https://github.com/neovim/neovim/releases)" >&2 ;;
+        linux-*|wsl) echo "  Download: https://github.com/neovim/neovim/releases/tag/v${MIN_NVIM_VERSION}" >&2 ;;
+    esac
+    echo "" >&2
+    exit 1
 fi
 
 link_configs
