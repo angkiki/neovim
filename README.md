@@ -66,13 +66,19 @@ It will:
 3. **Install [oh-my-zsh](https://ohmyz.sh/)** — non-interactively (`RUNZSH=no CHSH=no KEEP_ZSHRC=yes`), so your existing `.zshrc` is left in place.
 4. **Symlink `zsh/` → `~/.config/zsh`** and add a `source` line to `.zshrc` (backed up first, and only added once).
 
-This gives you `fcp` — a shell function that fuzzy-picks a source file and a destination directory (via `fd` + `fzf`) and copies it, so you never have to type or remember full paths:
+This gives you two shell functions built on `fd` + `fzf`, so you never have to type or remember full paths:
 
-```bash
-fcp
-# copy: <fuzzy-search files>
-# to:   <fuzzy-search dirs>
-```
+- **`fcp`** — fuzzy-pick a source file and a destination directory, then copy:
+  ```bash
+  fcp
+  # copy: <fuzzy-search files>
+  # to:   <fuzzy-search dirs>
+  ```
+- **`fcd`** — fuzzy-pick a directory and `cd` into it:
+  ```bash
+  fcd
+  # cd: <fuzzy-search dirs>
+  ```
 
 Hidden files/dirs (dotfiles) are off by default in each picker — press **ctrl-h** to toggle them on, ctrl-h again to hide them.
 
