@@ -110,6 +110,32 @@ install_fd() {
     fi
 }
 
+# ── fd global ignore ───────────────────────────────────────────────────────────
+# fd always reads ~/.config/fd/ignore (gitignore syntax), regardless of --hidden.
+# Symlinking it keeps `fd`/`fcp` fast in noisy dirs like $HOME.
+link_fd_ignore() {
+    local src="$REPO_DIR/fd/ignore"
+    local dest="$HOME/.config/fd/ignore"
+
+    mkdir -p "$HOME/.config/fd"
+
+    if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
+        success "$dest already linked"
+        return
+    fi
+
+    if [[ -e "$dest" && ! -L "$dest" ]]; then
+        local backup="${dest}.bak.$(date +%Y%m%d%H%M%S)"
+        warn "Backing up existing $dest → $backup"
+        mv "$dest" "$backup"
+    elif [[ -L "$dest" ]]; then
+        rm "$dest"
+    fi
+
+    ln -s "$src" "$dest"
+    success "Linked $dest → $src"
+}
+
 # ── shell functions (fcp, ...) ────────────────────────────────────────────────
 link_zsh_functions() {
     local src="$REPO_DIR/zsh"
@@ -156,6 +182,7 @@ echo ""
 
 install_fzf
 install_fd
+link_fd_ignore
 install_ohmyzsh
 link_zsh_functions
 
