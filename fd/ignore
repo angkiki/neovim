@@ -1,0 +1,31 @@
+# Global ignore rules for fd (https://github.com/sharkdp/fd) — gitignore syntax.
+# Applied everywhere fd runs (including via `fcp`, `zsh/functions.zsh`),
+# regardless of --hidden. Keeps searches from home/large dirs fast and readable.
+
+# VCS
+.git/
+
+# Language / package managers
+node_modules/
+.venv/
+venv/
+__pycache__/
+.cargo/
+.rustup/
+
+# Caches
+.cache/
+.npm/
+
+# Framework / build output
+dist/
+build/
+target/
+.next/
+.nuxt/
+.terraform/
+
+# Misc noisy dirs
+.oh-my-zsh/
+.vscode-server/
+.Trash/
