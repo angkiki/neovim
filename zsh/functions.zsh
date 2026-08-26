@@ -36,3 +36,18 @@ fcp() {
 
     cp -v "$src" "$dest"
 }
+
+# fcd — fuzzy-pick a directory and cd into it.
+# Requires: fzf, fd
+fcd() {
+    if ! command -v fzf &>/dev/null || ! command -v fd &>/dev/null; then
+        echo "fcd: requires fzf and fd — run tools.sh to install them" >&2
+        return 1
+    fi
+
+    local dir
+    dir=$(_fcp_pick d "cd: ")
+    [[ -z "$dir" ]] && return 1
+
+    cd "$dir"
+}
