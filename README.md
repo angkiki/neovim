@@ -74,6 +74,8 @@ fcp
 # to:   <fuzzy-search dirs>
 ```
 
+Hidden files/dirs (dotfiles) are off by default in each picker — press **ctrl-h** to toggle them on, ctrl-h again to hide them.
+
 More shell functions can be added to `zsh/functions.zsh` over time — re-run `tools.sh` to pick up the symlink if it's missing, no need to touch `.zshrc` again.
 
 ---
