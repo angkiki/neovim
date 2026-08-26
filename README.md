@@ -8,6 +8,7 @@ A personal Neovim config (and friends). This repo manages configs for:
 | [Kitty](https://sw.kovidgoyal.net/kitty/) | `kitty/` |
 | [Lazygit](https://github.com/jesseduffield/lazygit) | `lazygit/` |
 | [Alacritty](https://alacritty.org) | `alacritty/` *(optional, see below)* |
+| zsh functions (`fcp`, ...) | `zsh/` *(optional, see [QoL Shell Tools](#qol-shell-tools))* |
 
 ## Quick Start
 
@@ -47,6 +48,31 @@ Instead of copying config files in and out of the repo, `setup.sh` creates symli
 ```
 
 Any change you make in `~/.config/nvim` is a change in this repo — just `git commit` and push.
+
+---
+
+## QoL Shell Tools
+
+`tools.sh` is separate from `setup.sh` — it's optional shell tooling, not required for Neovim to work. Idempotent (safe to re-run) and OS-aware, same as `setup.sh`.
+
+```bash
+./tools.sh
+```
+
+It will:
+1. **Install `fzf` and `fd`** — via Homebrew/apt/pacman. On Debian/Ubuntu the `fd-find` package installs its binary as `fdfind`; `tools.sh` symlinks it to `~/.local/bin/fd` so it's callable the same way everywhere.
+2. **Install [oh-my-zsh](https://ohmyz.sh/)** — non-interactively (`RUNZSH=no CHSH=no KEEP_ZSHRC=yes`), so your existing `.zshrc` is left in place.
+3. **Symlink `zsh/` → `~/.config/zsh`** and add a `source` line to `.zshrc` (backed up first, and only added once).
+
+This gives you `fcp` — a shell function that fuzzy-picks a source file and a destination directory (via `fd` + `fzf`) and copies it, so you never have to type or remember full paths:
+
+```bash
+fcp
+# copy: <fuzzy-search files>
+# to:   <fuzzy-search dirs>
+```
+
+More shell functions can be added to `zsh/functions.zsh` over time — re-run `tools.sh` to pick up the symlink if it's missing, no need to touch `.zshrc` again.
 
 ---
 
