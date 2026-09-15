@@ -23,16 +23,17 @@ config.keys = {
     mods = 'SHIFT',
     action = wezterm.action.SendString '\n',
   },
-  -- Incremental scrollback scroll, mirroring vim's Ctrl+e / Ctrl+y.
+  -- Incremental scrollback scroll, one-handed: e = down, q = up.
   -- Bound to Ctrl+Shift (not plain Ctrl) so it doesn't shadow readline's
-  -- Ctrl+E (end of line) / Ctrl+Y (yank) in the shell.
+  -- Ctrl+E (end of line) in the shell; 'q' is free (WezTerm only binds
+  -- bare 'q' inside copy mode by default).
   {
     key = 'e',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.ScrollByLine(3),
   },
   {
-    key = 'y',
+    key = 'q',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.ScrollByLine(-3),
   },
