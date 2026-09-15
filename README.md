@@ -8,6 +8,7 @@ A personal Neovim config (and friends). This repo manages configs for:
 | [Kitty](https://sw.kovidgoyal.net/kitty/) | `kitty/` |
 | [Lazygit](https://github.com/jesseduffield/lazygit) | `lazygit/` |
 | [Alacritty](https://alacritty.org) | `alacritty/` *(optional, see below)* |
+| [WezTerm](https://wezterm.org) | `wezterm/` *(WSL only, see [WezTerm on WSL](#wezterm-on-wsl))* |
 | zsh functions (`fcp`, ...) | `zsh/` *(optional, see [QoL Shell Tools](#qol-shell-tools))* |
 | fd global ignore rules | `fd/` *(optional, see [QoL Shell Tools](#qol-shell-tools))* |
 
@@ -24,6 +25,7 @@ chmod +x setup.sh && ./setup.sh
 The script will:
 1. **Install dependencies** — `neovim`, `lazygit`, `ripgrep`, `fd`, Hack Nerd Font (macOS via Homebrew; Linux via apt/pacman + GitHub releases)
 2. **Symlink configs** — `nvim`, `kitty`, and `lazygit` are symlinked to `~/.config/` automatically. Existing configs are backed up with a timestamp.
+3. **On WSL**, also link WezTerm's config — see [WezTerm on WSL](#wezterm-on-wsl).
 
 To also link the Alacritty config, pass `--alacritty`:
 
@@ -49,6 +51,17 @@ Instead of copying config files in and out of the repo, `setup.sh` creates symli
 ```
 
 Any change you make in `~/.config/nvim` is a change in this repo — just `git commit` and push.
+
+---
+
+## WezTerm on WSL
+
+WezTerm on Windows only reads `C:\Users\<you>\.wezterm.lua` — it can't read `~/.config` inside WSL directly. `setup.sh` handles the bridge automatically on WSL:
+
+1. Tries to create a real Windows symlink from `C:\Users\<you>\.wezterm.lua` to `wezterm/wezterm.lua` in this repo (via `\\wsl.localhost\...`). This needs either **Developer Mode** enabled (Settings → Privacy & security → For developers) or an elevated shell — without one of those, Windows refuses non-admin symlink creation.
+2. If the symlink can't be created, it falls back to a **one-off copy** of `wezterm/wezterm.lua` to `C:\Users\<you>\.wezterm.lua`. In that mode, edit `wezterm/wezterm.lua` in the repo and re-run `./setup.sh` to re-sync — edits made directly to the Windows-side file won't flow back.
+
+An existing `.wezterm.lua` is backed up with a timestamp before either path runs.
 
 ---
 

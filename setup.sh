@@ -208,6 +208,55 @@ link_configs() {
     if [[ "$USE_ALACRITTY" == true ]]; then
         _link_one "alacritty" "$HOME/.config/alacritty"
     fi
+
+    if [[ "$OS" == "wsl" ]]; then
+        link_wezterm
+    fi
+}
+
+# WezTerm's config always lives on the Windows side (C:\Users\<you>\.wezterm.lua),
+# so it can't use _link_one. We try a real Windows symlink to the repo file first
+# (needs Developer Mode, or an elevated shell) and fall back to a one-off copy.
+link_wezterm() {
+    local src="$REPO_DIR/wezterm/wezterm.lua"
+    if [[ ! -f "$src" ]]; then
+        warn "wezterm/wezterm.lua not found in repo — skipping WezTerm setup"
+        return
+    fi
+    if ! command -v powershell.exe &>/dev/null; then
+        warn "powershell.exe not found — skipping WezTerm setup"
+        return
+    fi
+
+    local win_profile
+    win_profile=$(powershell.exe -NoProfile -Command '$env:USERPROFILE' 2>/dev/null | tr -d '\r\n')
+    if [[ -z "$win_profile" ]]; then
+        warn "Could not determine Windows user profile — skipping WezTerm setup"
+        return
+    fi
+
+    local dest_wsl dest_win src_unc
+    dest_win="${win_profile}\\.wezterm.lua"
+    dest_wsl=$(wslpath -u "$dest_win")
+    src_unc=$(wslpath -w "$src")
+
+    if [[ -L "$dest_wsl" ]]; then
+        rm -f "$dest_wsl"
+    elif [[ -e "$dest_wsl" ]]; then
+        local backup="${dest_wsl}.bak.$(date +%Y%m%d%H%M%S)"
+        warn "Backing up existing $(wslpath -w "$dest_wsl") -> $(wslpath -w "$backup")"
+        mv "$dest_wsl" "$backup"
+    fi
+
+    if powershell.exe -NoProfile -Command "New-Item -ItemType SymbolicLink -Path '${dest_win}' -Target '${src_unc}' -Force" &>/dev/null \
+        && [[ -L "$dest_wsl" ]]; then
+        success "Linked ${dest_win} -> $src_unc"
+        return
+    fi
+
+    warn "Symlink creation failed (enable Windows Developer Mode: Settings > Privacy & security > For developers) — falling back to copy"
+    cp "$src" "$dest_wsl"
+    success "Copied WezTerm config to ${dest_win} (re-run setup.sh after editing wezterm/wezterm.lua to re-sync)"
 }
 
 # ── Main ───────────────────────────────────────────────────────────────────────
