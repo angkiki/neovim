@@ -29,12 +29,12 @@ config.keys = {
   {
     key = 'e',
     mods = 'CTRL|SHIFT',
-    action = wezterm.action.ScrollByLine(1),
+    action = wezterm.action.ScrollByLine(3),
   },
   {
     key = 'y',
     mods = 'CTRL|SHIFT',
-    action = wezterm.action.ScrollByLine(-1),
+    action = wezterm.action.ScrollByLine(-3),
   },
 }
 
